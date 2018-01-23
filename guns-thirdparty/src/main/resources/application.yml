@@ -1,0 +1,8 @@
+####################  alioss配置  ###################
+#alioss:
+#  bucketName: zwwlive-video
+#  accessKeyId: q1lJznldz71HseZ9
+#  accessKeySecret: J65oL2PyKSpOYiV2nBFnnL581Ee6WE
+#  endPoint: http://oss-cn-beijing.aliyuncs.com
+#  endPointOuternal: http://oss-cn-beijing.aliyuncs.com
+#  compressQualityRate: 0.5
