@@ -46,7 +46,7 @@ public class PdfTempGen {
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("name", "小帅哥");
             data.put("where", "在那");
-            data.put("test", "测试aa");
+            data.put("test", "测试aaadafafadfae");
             // 7遍历data 给pdf表单表格赋值
             for (String key : data.keySet()) {
                 form.setField(key,data.get(key).toString());
