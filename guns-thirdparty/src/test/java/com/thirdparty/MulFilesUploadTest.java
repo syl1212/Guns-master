@@ -72,7 +72,7 @@ public class MulFilesUploadTest {
 
     @Test
     public void getTempUrl() throws Exception {
-        String key = "images/20180122/200_1516603850457001.jpg";
+        String key = "guns-alioss/images/20180122/200_1516603850457000.jpg";
         System.out.println(aliOSSFileService.downloadFileTempUrl(key));
     }
 }

@@ -64,14 +64,16 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 		try {
 			ObjectMetadata metadata = new ObjectMetadata();
 			metadata.setContentLength(uploadDTO.getFileLength());
-			
-			PutObjectResult result = createOSSClient().putObject(
+
+			OSSClient ossClient = createOSSClient();
+			PutObjectResult result = ossClient.putObject(
 					config.getBucketName(), uploadDTO.getFileName(),
 					new ByteArrayInputStream(uploadDTO.getInput()), metadata);
 			
 			
 			String url =  this.getAliOOSFileAccessUrl(uploadDTO);
-			
+			ossClient.shutdown();
+
 			logger.info("上传文件的名称为：{"+uploadDTO.getFileName()+"}，OSS返回文件ETag为：{"+result.getETag()+"}");
 			
 			return url;
@@ -89,8 +91,10 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 		byte[] bytes = new byte[0];
 		OSSObject obj = null;
 		InputStream is = null;
-		try {
-			obj = createOSSClient().getObject(config.getBucketName(),
+		OSSClient ossClient = null;
+		try{
+			ossClient = createOSSClient();
+			obj = ossClient.getObject(config.getBucketName(),
 					fileName);
 
 			is = obj.getObjectContent();
@@ -99,6 +103,8 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 			this.exception(e);
 		} finally {
 			IOUtils.safeClose(is);
+			if(ossClient != null)
+				ossClient.shutdown();
 		}
 
 		return bytes;
@@ -114,7 +120,9 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
             // 设置URL过期时间为1小时
             Date expiration = new Date(new Date().getTime() + 3600 * 1000);
             // 生成URL
-            url = createOSSClient().generatePresignedUrl(config.getBucketName(), key, expiration);
+			OSSClient ossClient = createOSSClient();
+            url = ossClient.generatePresignedUrl(config.getBucketName(), key, expiration);
+			ossClient.shutdown();
             return url.toString();
         } catch (Exception e) {
             this.exception(e);
@@ -127,8 +135,10 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 	 */
 	public boolean exists(String fileName) throws GetFileInfoFailedException {
 		try {
-			createOSSClient().getObjectMetadata(config.getBucketName(),
+			OSSClient ossClient = createOSSClient();
+			ossClient.getObjectMetadata(config.getBucketName(),
 						fileName);
+			ossClient.shutdown();
 		} catch (Exception e) {
 			if(e instanceof OSSException){
 				OSSException oe = (OSSException) e;
