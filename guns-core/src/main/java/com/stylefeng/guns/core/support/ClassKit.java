@@ -50,8 +50,9 @@ public class ClassKit {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T newInstance(String clazz) {
-		if (null == clazz)
+		if (null == clazz) {
 			return null;
+		}
 		try {
 			return (T) Class.forName(clazz).newInstance();
 		} catch (Exception e) {
@@ -66,8 +67,9 @@ public class ClassKit {
 	 * @return 对象
 	 */
 	public static <T> T newInstance(Class<T> clazz) {
-		if (null == clazz)
+		if (null == clazz) {
 			return null;
+		}
 		try {
 			return (T) clazz.newInstance();
 		} catch (Exception e) {
@@ -82,8 +84,9 @@ public class ClassKit {
 	 * @return 对象
 	 */
 	public static <T> T newInstance(Class<T> clazz, Object... params) {
-		if (null == clazz)
+		if (null == clazz) {
 			return null;
+		}
 		if (CollectionKit.isEmpty(params)) {
 			return newInstance(clazz);
 		}

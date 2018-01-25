@@ -21,7 +21,8 @@ package com.stylefeng.guns.core.cache;
  */
 public abstract class BaseCacheFactory implements ICache {
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public <T> T get(String cacheName, Object key, ILoader iLoader) {
 		Object data = get(cacheName, key);
 		if (data == null) {
@@ -31,7 +32,8 @@ public abstract class BaseCacheFactory implements ICache {
 		return (T) data;
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public <T> T get(String cacheName, Object key, Class<? extends ILoader> iLoaderClass) {
 		Object data = get(cacheName, key);
 		if (data == null) {

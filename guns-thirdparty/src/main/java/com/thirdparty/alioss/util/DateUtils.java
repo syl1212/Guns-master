@@ -101,7 +101,7 @@ public class DateUtils extends DateFormatter {
 	 * @throws ParseException 
 	 */
 	public static Date getCurrentTime(int formatType) throws ParseException {
-		String today = getStringTime(new Date().getTime(),formatType);
+		String today = getStringTime(System.currentTimeMillis(),formatType);
 		return formatStringTime(today,formatType);
 	}
 	

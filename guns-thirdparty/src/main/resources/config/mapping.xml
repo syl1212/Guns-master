@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2013, Single Mountain Technology. All rights reserved.
+  ~
+  ~ This is unpublished proprietary source code of the Single Mountain Technology.
+  ~ This is unpublished proprietary source code of the Single Mountain Technology.
+  ~ publication of such source code.
+  -->
+
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <configuration>
+        <stop-on-errors>true</stop-on-errors>
+        <date-format>yyyy.MM.dd  HH:mm:ss</date-format>
+        <wildcard>true</wildcard>
+    </configuration>
+
+
+</mappings>

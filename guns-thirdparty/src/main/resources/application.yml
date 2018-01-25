@@ -5,4 +5,11 @@
 #  accessKeySecret: J65oL2PyKSpOYiV2nBFnnL581Ee6WE
 #  endPoint: http://oss-cn-beijing.aliyuncs.com
 #  endPointOuternal: http://oss-cn-beijing.aliyuncs.com
-#  compressQualityRate: 0.5
+#  compressQualityRate: 0.5server:server:
+################     端口号     ######################
+server:
+  port: 8280
+#####################################################
+mq:
+  demo:
+    key: true

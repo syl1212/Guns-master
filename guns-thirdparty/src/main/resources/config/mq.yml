@@ -1,0 +1,17 @@
+#mq连接配置
+rabbitmq.demo.address=127.0.0.1:5672
+rabbitmq.demo.username=sunyuanli
+rabbitmq.demo.password=sunyuanli
+rabbitmq.demo.vhost=/
+
+#################################################
+rabbitmq.demo.key=true
+#demo rabbitmq consumer endpoint config
+rabbitmq.demo.trans.exchange.name=te-demo-bound
+rabbitmq.demo.trans.req.queue.name=q-demo-req
+rabbitmq.demo.trans.req.routingkey=demo.req.routingkey
+rabbitmq.demo.trans.req.binding.pattern=demo.req.routingkey
+
+#demo rabbitmq producer endpoint config
+rabbitmq.pho.trans.res.routingkey=demo.res.routingkey
+#################################################

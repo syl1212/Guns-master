@@ -48,6 +48,9 @@
         <springframework.web.version>4.3.13.RELEASE</springframework.web.version>
         <itextpdf.version>5.5.12</itextpdf.version>
         <itxtpdf.asian.version>5.2.0</itxtpdf.asian.version>
+        <lombok.version>1.16.18</lombok.version>
+        <dozer.version>5.5.1</dozer.version>
+        <xstream.version>1.4.10</xstream.version>
     </properties>
 
     <dependencyManagement>
@@ -197,6 +200,24 @@
                  <groupId>com.itextpdf</groupId>
                  <artifactId>itext-asian</artifactId>
                  <version>${itxtpdf.asian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

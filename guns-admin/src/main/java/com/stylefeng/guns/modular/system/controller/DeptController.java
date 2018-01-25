@@ -137,7 +137,7 @@ public class DeptController extends BaseController {
         }
         deptSetPids(dept);
         deptMapper.updateById(dept);
-        return super.SUCCESS_TIP;
+        return BaseController.SUCCESS_TIP;
     }
 
     /**

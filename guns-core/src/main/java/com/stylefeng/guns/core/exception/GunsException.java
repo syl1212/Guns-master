@@ -38,7 +38,8 @@ public class GunsException extends RuntimeException {
 		this.friendlyCode = code;
 	}
 
-	public String getMessage() {
+	@Override
+    public String getMessage() {
 		return friendlyMsg;
 	}
 

@@ -13,7 +13,8 @@ public class AbstractFileRemoteService implements FileRemoteService {
 	/* (non-Javadoc)
 	 * @see com.yjf.yrd.qsc.service.file.FileRemoteService#uploadFile(com.yjf.yrd.qsc.service.file.UploadFileDTO)
 	 */
-	public String uploadFile(UploadFileDTO uploadDTO)
+	@Override
+    public String uploadFile(UploadFileDTO uploadDTO)
 			throws UploadFileException {
 		if(StringUtils.isBlank(uploadDTO.getFileName())){
 			throw new UploadFileException("upload fileName is empty");
@@ -62,14 +63,16 @@ public class AbstractFileRemoteService implements FileRemoteService {
 	/* (non-Javadoc)
 	 * @see com.yjf.yrd.qsc.service.file.FileRemoteService#downloadFile(java.lang.String)
 	 */
-	public byte[] downloadFile(String fileName) throws GetFileInfoFailedException {
+	@Override
+    public byte[] downloadFile(String fileName) throws GetFileInfoFailedException {
 		return null;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.yjf.yrd.qsc.service.file.FileRemoteService#exists(java.lang.String)
 	 */
-	public boolean exists(String fileName) throws GetFileInfoFailedException {
+	@Override
+    public boolean exists(String fileName) throws GetFileInfoFailedException {
 		return false;
 	}
 

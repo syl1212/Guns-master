@@ -52,6 +52,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 	/* (non-Javadoc)
 	 * @see com.health.alioos.service.FileRemoteService#uploadFile(com.health.alioos.vo.UploadDTO)
 	 */
+	@Override
 	public String uploadFile(UploadFileDTO uploadDTO) throws UploadFileException {
 		if(StringUtils.isBlank(uploadDTO.getFileName())){
 			throw new UploadFileException("upload fileName is empty");
@@ -86,6 +87,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 	/* (non-Javadoc)
 	 * @see com.health.alioos.service.FileRemoteService#downloadFile(java.lang.String)
 	 */
+	@Override
 	public byte[] downloadFile(String fileName)
 			throws GetFileInfoFailedException {
 		byte[] bytes = new byte[0];
@@ -103,8 +105,9 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 			this.exception(e);
 		} finally {
 			IOUtils.safeClose(is);
-			if(ossClient != null)
+			if(ossClient != null) {
 				ossClient.shutdown();
+			}
 		}
 
 		return bytes;
@@ -113,12 +116,13 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
     /* (non-Javadoc)
      * @see com.health.alioos.service.FileRemoteService#downloadFile(java.lang.String)
      */
-    public String downloadFileTempUrl(String key)
+    @Override
+	public String downloadFileTempUrl(String key)
             throws GetFileInfoFailedException {
         URL url = null;
         try {
             // 设置URL过期时间为1小时
-            Date expiration = new Date(new Date().getTime() + 3600 * 1000);
+            Date expiration = new Date(System.currentTimeMillis() + 3600 * 1000);
             // 生成URL
 			OSSClient ossClient = createOSSClient();
             url = ossClient.generatePresignedUrl(config.getBucketName(), key, expiration);
@@ -133,6 +137,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 	/* (non-Javadoc)
 	 * @see com.health.alioos.service.FileRemoteService#exists(java.lang.String)
 	 */
+	@Override
 	public boolean exists(String fileName) throws GetFileInfoFailedException {
 		try {
 			OSSClient ossClient = createOSSClient();
@@ -302,7 +307,8 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
                 for(int i=0;i<files.length;i++){
                     MultipartFile file = files[i];
                     Future<String> f = pool.submit(new Callable<String>() {
-                        public String call(){
+                        @Override
+						public String call(){
                             try {
                                 return handleOneFileItem(file, fileTypeList);
                             } catch (Exception e) {
