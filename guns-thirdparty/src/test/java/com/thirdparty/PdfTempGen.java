@@ -25,13 +25,13 @@ public class PdfTempGen {
         System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
                 "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
         //String path = request.getSession().getServletContext().getRealPath("/upload/");
-        String filename="测试1.pdf";
+        String filename="organizational_risk_assessment_result-radio.pdf";
         String path="C:/Users/syl/Desktop/";
         OutputStream os = null;
         PdfStamper ps = null;
         PdfReader reader = null;
         try {
-            os = new FileOutputStream("C:/Users/syl/Desktop/testResult1-1.pdf");
+            os = new FileOutputStream("C:/Users/syl/Desktop/organizational_risk_assessment_result-radio-1.pdf");
             // 2 读入pdf表单
             reader = new PdfReader(path+ "/"+filename);
             // 3 根据表单生成一个新的pdf
@@ -44,9 +44,12 @@ public class PdfTempGen {
             form.addSubstitutionFont(bf);
             // 6查询数据================================================
             Map<String, Object> data = new HashMap<String, Object>();
-            data.put("name", "小帅哥");
-            data.put("where", "在那");
-            data.put("test", "测试");
+//            data.put("name", "小帅哥");
+//            data.put("where", "在那");
+//            data.put("test", "测试");
+            data.put("group1","C");
+            data.put("font1","随笔了啊");
+            data.put("font2","普通");
             // 7遍历data 给pdf表单表格赋值
             for (String key : data.keySet()) {
                 form.setField(key,data.get(key).toString());
@@ -55,7 +58,7 @@ public class PdfTempGen {
             //-----------------------------pdf 添加图片----------------------------------
             // 通过域名获取所在页和坐标，左下角为起点
             System.out.println("pdf 添加图片");
-            String imgpath="D:/other_unimportant/baby1.jpg";
+            String imgpath="C:/Users/syl/Desktop/timg.jpg";
             int pageNo = form.getFieldPositions("img").get(0).page;
             Rectangle signRect = form.getFieldPositions("img").get(0).position;
             float x = signRect.getLeft();

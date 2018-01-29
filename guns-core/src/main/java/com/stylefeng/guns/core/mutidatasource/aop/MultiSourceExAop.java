@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -25,9 +26,10 @@ import java.lang.reflect.Method;
  * @date 2017年3月5日 上午10:22:16
  */
 @Aspect
+@Order(1)
 @Component
 @ConditionalOnProperty(prefix = "guns", name = "muti-datasource-open", havingValue = "true")
-public class MultiSourceExAop implements Ordered {
+public class MultiSourceExAop {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -67,15 +69,6 @@ public class MultiSourceExAop implements Ordered {
             log.debug("清空数据源信息！");
             DataSourceContextHolder.clearDataSourceType();
         }
-    }
-
-
-    /**
-     * aop的顺序要早于spring的事务
-     */
-    @Override
-    public int getOrder() {
-        return 1;
     }
 
 }
