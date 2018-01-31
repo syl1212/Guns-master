@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @Date 2017/5/21 12:06
  */
 @SpringBootApplication(scanBasePackages = {"com.stylefeng.guns,com.thirdparty"})
+@EnableCaching
 public class GunsApplication extends WebMvcConfigurerAdapter{
 
     protected final static Logger logger = LoggerFactory.getLogger(GunsApplication.class);

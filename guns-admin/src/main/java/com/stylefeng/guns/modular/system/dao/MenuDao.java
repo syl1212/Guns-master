@@ -3,6 +3,8 @@ package com.stylefeng.guns.modular.system.dao;
 import com.stylefeng.guns.core.node.MenuNode;
 import com.stylefeng.guns.core.node.ZTreeNode;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Map;
@@ -72,6 +74,7 @@ public interface MenuDao {
      * @return
      * @date 2017年2月19日 下午10:35:40
      */
+    @Cacheable(value = "getMenusByRoleIds")
     List<MenuNode> getMenusByRoleIds(List<Integer> roleIds);
 
 
