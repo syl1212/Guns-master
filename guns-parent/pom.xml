@@ -51,6 +51,7 @@
         <lombok.version>1.16.18</lombok.version>
         <dozer.version>5.5.1</dozer.version>
         <xstream.version>1.4.10</xstream.version>
+        <guava.version>19.0</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -218,6 +219,12 @@
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
                 <version>${xstream.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
