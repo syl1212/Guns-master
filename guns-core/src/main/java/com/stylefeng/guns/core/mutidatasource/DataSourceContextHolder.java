@@ -8,7 +8,7 @@ package com.stylefeng.guns.core.mutidatasource;
  */
 public class DataSourceContextHolder {
 
-    private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
+    private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<String>();
 
     /**
      * 设置数据源类型
@@ -16,20 +16,20 @@ public class DataSourceContextHolder {
      * @param dataSourceType 数据库类型
      */
     public static void setDataSourceType(String dataSourceType) {
-        contextHolder.set(dataSourceType);
+        CONTEXT_HOLDER.set(dataSourceType);
     }
 
     /**
      * 获取数据源类型
      */
     public static String getDataSourceType() {
-        return contextHolder.get();
+        return CONTEXT_HOLDER.get();
     }
 
     /**
      * 清除数据源类型
      */
     public static void clearDataSourceType() {
-        contextHolder.remove();
+        CONTEXT_HOLDER.remove();
     }
 }

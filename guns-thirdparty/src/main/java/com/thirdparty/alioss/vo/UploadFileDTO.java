@@ -1,6 +1,7 @@
 package com.thirdparty.alioss.vo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class UploadFileDTO implements Serializable {
 	private static final long serialVersionUID = 3980076904499581368L;
@@ -34,7 +35,7 @@ public class UploadFileDTO implements Serializable {
 	/**
 	 * 文件大小
 	 */
-	private long fileLength;
+	private Long fileLength;
 
 	public String getFileName() {
 		return fileName;
@@ -76,11 +77,23 @@ public class UploadFileDTO implements Serializable {
 		this.input = input;
 	}
 
-	public long getFileLength() {
+	public Long getFileLength() {
 		return fileLength;
 	}
 
-	public void setFileLength(long fileLength) {
+	public void setFileLength(Long fileLength) {
 		this.fileLength = fileLength;
+	}
+
+	@Override
+	public String toString() {
+		return "UploadFileDTO{" +
+				"fileName='" + fileName + '\'' +
+				", fileStorePathName='" + fileStorePathName + '\'' +
+				", fileSuffix='" + fileSuffix + '\'' +
+				", fileDesc='" + fileDesc + '\'' +
+				", input=" + Arrays.toString(input) +
+				", fileLength=" + fileLength +
+				'}';
 	}
 }

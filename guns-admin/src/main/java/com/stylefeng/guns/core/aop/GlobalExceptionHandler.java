@@ -3,7 +3,7 @@ package com.stylefeng.guns.core.aop;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.exception.InvalidKaptchaException;
-import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.base.tips.ErrorAbstractTip;
 import com.stylefeng.guns.core.log.LogManager;
 import com.stylefeng.guns.core.log.factory.LogTaskFactory;
 import com.stylefeng.guns.core.shiro.ShiroKit;
@@ -47,11 +47,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BussinessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ErrorTip notFount(BussinessException e) {
+    public ErrorAbstractTip notFount(BussinessException e) {
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
         getRequest().setAttribute("tip", e.getMessage());
         log.error("业务异常:", e);
-        return new ErrorTip(e.getCode(), e.getMessage());
+        return new ErrorAbstractTip(e.getCode(), e.getMessage());
     }
 
     /**
@@ -116,10 +116,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UndeclaredThrowableException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    public ErrorTip credentials(UndeclaredThrowableException e) {
+    public ErrorAbstractTip credentials(UndeclaredThrowableException e) {
         getRequest().setAttribute("tip", "权限异常");
         log.error("权限异常!", e);
-        return new ErrorTip(BizExceptionEnum.NO_PERMITION.getCode(),BizExceptionEnum.NO_PERMITION.getMessage());
+        return new ErrorAbstractTip(BizExceptionEnum.NO_PERMITION.getCode(),BizExceptionEnum.NO_PERMITION.getMessage());
     }
 
     /**
@@ -130,11 +130,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ErrorTip notFount(RuntimeException e) {
+    public ErrorAbstractTip notFount(RuntimeException e) {
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
         getRequest().setAttribute("tip", "服务器未知运行时异常");
         log.error("运行时异常:", e);
-        return new ErrorTip(BizExceptionEnum.SERVER_ERROR.getCode(),BizExceptionEnum.SERVER_ERROR.getMessage());
+        return new ErrorAbstractTip(BizExceptionEnum.SERVER_ERROR.getCode(),BizExceptionEnum.SERVER_ERROR.getMessage());
     }
 
     /**
@@ -167,7 +167,7 @@ public class GlobalExceptionHandler {
 
     private void assertAjax(HttpServletRequest request, HttpServletResponse response) {
         if (request.getHeader("x-requested-with") != null
-                && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+                && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("x-requested-with"))) {
             //如果是ajax请求响应头会有，x-requested-with
             response.setHeader("sessionstatus", "timeout");//在响应头设置session状态
         }

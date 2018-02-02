@@ -246,7 +246,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 
 		if(fileTypeList.length > 0){
 			if (!Arrays.asList(fileTypeList).contains(extName.toLowerCase())) {
-				throw new UploadFileException(UploadFileResultEnum.illegalFileType.getMessage());
+				throw new UploadFileException(UploadFileResultEnum.ILLEGAL_FILE_TYPE.getMessage());
 			}
 		}
 
@@ -267,7 +267,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 			String savePath = pathArray[0];
 			
 			//获取文件
-			byte data[] = item.getBytes();
+			byte[] data = item.getBytes();
 			if(fileUtil.isImage(extName)) {
 				data = fileUtil.compressFileToBytes(item, config.getCompressQualityRate());
 			}
@@ -284,7 +284,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
 			if(pathArray != null) {
 				logger.info(String.format("upload file [{}] ready store path [{}], access path [{}] ", name, pathArray[0], pathArray[1]));
 			}
-			throw new UploadFileException(UploadFileResultEnum.uploadError.getMessage());
+			throw new UploadFileException(UploadFileResultEnum.UPLOAD_ERROR.getMessage());
 		}
 		//写入文件地址,访问文件地址,上传文件名,写入文件名
 		return pathArray[1];
@@ -326,7 +326,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
                 logger.info("多文件上传完成");
             }
         } catch (Exception e){
-            throw new UploadFileException(UploadFileResultEnum.uploadError.getMessage());
+            throw new UploadFileException(UploadFileResultEnum.UPLOAD_ERROR.getMessage());
         }
 		return futures;
 
@@ -351,7 +351,7 @@ public class AliOSSFileServiceImpl implements FileRemoteService {
                 logger.info("多文件上传完成");
             }
         } catch (Exception e){
-            throw new UploadFileException(UploadFileResultEnum.uploadError.getMessage());
+            throw new UploadFileException(UploadFileResultEnum.UPLOAD_ERROR.getMessage());
         }
         return futures;
     }

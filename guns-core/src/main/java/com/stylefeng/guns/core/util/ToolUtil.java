@@ -217,7 +217,7 @@ public class ToolUtil {
             return true;
         }
         if (o instanceof String) {
-            if (o.toString().trim().equals("")) {
+            if ("".equals(o.toString().trim())) {
                 return true;
             }
         } else if (o instanceof List) {

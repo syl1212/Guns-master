@@ -36,7 +36,7 @@ public class MulFilesUploadTest {
 
         MultipartFile[] multipartFiles = new MultipartFile[]{multipartFile,multipartFile1};
 
-        Map<String,String> map = aliOSSFileService.handleMulFilesSyn(multipartFiles, FileTypeArray.picArray);
+        Map<String,String> map = aliOSSFileService.handleMulFilesSyn(multipartFiles, FileTypeArray.PIC_ARRAY);
 
         if(map != null){
             for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -59,7 +59,7 @@ public class MulFilesUploadTest {
 
         MultipartFile[] multipartFiles = new MultipartFile[]{multipartFile,multipartFile1};
 
-        Map<String,Future<String>> map = aliOSSFileService.handleMulFilesAsyn(multipartFiles, FileTypeArray.picArray);
+        Map<String,Future<String>> map = aliOSSFileService.handleMulFilesAsyn(multipartFiles, FileTypeArray.PIC_ARRAY);
 
         if(map != null){
             for (Map.Entry<String, Future<String>> entry : map.entrySet()) {

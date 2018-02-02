@@ -40,7 +40,7 @@ public class TestServiceImpl implements ITestService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void testAll() {
         testBiz();
         testGuns();

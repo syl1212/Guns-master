@@ -219,7 +219,7 @@ public class DateUtils extends DateFormatter {
      * @return 相差小时数 
      * @throws ParseException  
      */    
-    public static int daysBetween_hms(Date smdate,Date bdate) throws ParseException    
+    public static int daysBetweenHms(Date smdate, Date bdate) throws ParseException
     {    
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");  
         smdate=sdf.parse(sdf.format(smdate));  
@@ -229,9 +229,9 @@ public class DateUtils extends DateFormatter {
         long time1 = cal.getTimeInMillis();                 
         cal.setTime(bdate);    
         long time2 = cal.getTimeInMillis();         
-        long between_days=(time2-time1)/(1000*3600);  
+        long betweenDays=(time2-time1)/(1000*3600);
             
-       return Integer.parseInt(String.valueOf(between_days));           
+       return Integer.parseInt(String.valueOf(betweenDays));
     } 
     
     
@@ -284,9 +284,9 @@ public class DateUtils extends DateFormatter {
         long time1 = cal.getTimeInMillis();                 
         cal.setTime(bdate);    
         long time2 = cal.getTimeInMillis();         
-        long between_days=(time2-time1)/(1000*3600*24);  
+        long betweenDays=(time2-time1)/(1000*3600*24);
             
-       return Integer.parseInt(String.valueOf(between_days));           
+       return Integer.parseInt(String.valueOf(betweenDays));
     } 
 	
     /*
@@ -300,21 +300,21 @@ public class DateUtils extends DateFormatter {
     	int lasts = Integer.parseInt(getDated());
     	
     	int num = 0;
-    	int hour = daysBetween_hms(start, end);
-    	int basic_num = 563;
+    	int hour = daysBetweenHms(start, end);
+    	int basicNum = 563;
     	int num10 = 9;
     	int num20 = 17;
     	int num40 = 23;
-    	int other_num = 1;
+    	int otherNum = 1;
     	
     	if(hour >= 0 && hour < 240){
-    		num = basic_num + hour * num10 + lasts + getRandom();
+    		num = basicNum + hour * num10 + lasts + getRandom();
     	}else if(hour >= 240 && hour < 480){
-    		num = basic_num + 240*9 + (hour-240)*17 + lasts + getRandom();
+    		num = basicNum + 240*9 + (hour-240)*17 + lasts + getRandom();
     	}else if(hour >= 480 && hour < 960){
-    		num = basic_num + 240*9 + 240*17 + (hour-480)*23 + lasts + getRandom();
+    		num = basicNum + 240*9 + 240*17 + (hour-480)*23 + lasts + getRandom();
     	}else if(hour >= 960){
-    		num = basic_num + 240*9 + 240*17 + 480*23 + (hour-960)*1 + lasts + getRandom();
+    		num = basicNum + 240*9 + 240*17 + 480*23 + (hour-960)*1 + lasts + getRandom();
     	}
     	
     	return num;

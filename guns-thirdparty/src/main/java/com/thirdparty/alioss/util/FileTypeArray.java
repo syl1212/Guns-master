@@ -5,9 +5,9 @@ package com.thirdparty.alioss.util;
  */
 public class FileTypeArray {
 
-    public static final String[] picArray = {".jpg",".bmp",".jpeg",".png",".gif"};
+    public static final String[] PIC_ARRAY = {".jpg",".bmp",".jpeg",".png",".gif"};
 
-    public static final String[] pdfArray = {".pdf"};
+    public static final String[] PDF_ARRAY = {".pdf"};
 
-    public static final String[] all = {};
+    public static final String[] ALL = {};
 }

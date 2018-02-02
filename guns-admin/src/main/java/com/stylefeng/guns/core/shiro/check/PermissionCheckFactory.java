@@ -29,10 +29,11 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 权限自定义检查
+ * @author syl
  */
 @Service
 @DependsOn("springContextHolder")
-@Transactional(readOnly = true)
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class PermissionCheckFactory implements ICheck {
 
     public static ICheck me() {

@@ -12,7 +12,7 @@ import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.core.base.tips.Tip;
+import com.stylefeng.guns.core.base.tips.AbstractTip;
 import com.stylefeng.guns.core.datascope.DataScope;
 import com.stylefeng.guns.core.db.Db;
 import com.stylefeng.guns.core.log.LogObjectHolder;
@@ -25,7 +25,6 @@ import com.stylefeng.guns.modular.system.transfer.UserDto;
 import com.stylefeng.guns.modular.system.warpper.UserWarpper;
 import com.thirdparty.alioss.service.AliOSSFileServiceImpl;
 import com.thirdparty.alioss.util.FileTypeArray;
-import com.thirdparty.alioss.vo.UploadFileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +35,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.naming.NoPermissionException;
 import javax.validation.Valid;
-import java.io.File;
 import java.util.*;
 
 /**
@@ -181,10 +179,10 @@ public class UserMgrController extends BaseController {
      * 添加管理员
      */
     @RequestMapping("/add")
-    @BussinessLog(value = "添加管理员", key = "account", dict = Dict.UserDict)
+    @BussinessLog(value = "添加管理员", key = "account", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip add(@Valid UserDto user, BindingResult result) {
+    public AbstractTip add(@Valid UserDto user, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -211,9 +209,9 @@ public class UserMgrController extends BaseController {
      * @throws NoPermissionException
      */
     @RequestMapping("/edit")
-    @BussinessLog(value = "修改管理员", key = "account", dict = Dict.UserDict)
+    @BussinessLog(value = "修改管理员", key = "account", dict = Dict.USER_DICT)
     @ResponseBody
-    public Tip edit(@Valid UserDto user, BindingResult result) throws NoPermissionException {
+    public AbstractTip edit(@Valid UserDto user, BindingResult result) throws NoPermissionException {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -236,10 +234,10 @@ public class UserMgrController extends BaseController {
      * 删除管理员（逻辑删除）
      */
     @RequestMapping("/delete")
-    @BussinessLog(value = "删除管理员", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "删除管理员", key = "userId", dict = Dict.USER_DICT)
     @Permission
     @ResponseBody
-    public Tip delete(@RequestParam Integer userId) {
+    public AbstractTip delete(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -269,10 +267,10 @@ public class UserMgrController extends BaseController {
      * 重置管理员的密码
      */
     @RequestMapping("/reset")
-    @BussinessLog(value = "重置管理员密码", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "重置管理员密码", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip reset(@RequestParam Integer userId) {
+    public AbstractTip reset(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -288,10 +286,10 @@ public class UserMgrController extends BaseController {
      * 冻结用户
      */
     @RequestMapping("/freeze")
-    @BussinessLog(value = "冻结用户", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "冻结用户", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip freeze(@RequestParam Integer userId) {
+    public AbstractTip freeze(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -308,10 +306,10 @@ public class UserMgrController extends BaseController {
      * 解除冻结用户
      */
     @RequestMapping("/unfreeze")
-    @BussinessLog(value = "解除冻结用户", key = "userId", dict = Dict.UserDict)
+    @BussinessLog(value = "解除冻结用户", key = "userId", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip unfreeze(@RequestParam Integer userId) {
+    public AbstractTip unfreeze(@RequestParam Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -324,10 +322,10 @@ public class UserMgrController extends BaseController {
      * 分配角色
      */
     @RequestMapping("/setRole")
-    @BussinessLog(value = "分配角色", key = "userId,roleIds", dict = Dict.UserDict)
+    @BussinessLog(value = "分配角色", key = "userId,roleIds", dict = Dict.USER_DICT)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip setRole(@RequestParam("userId") Integer userId, @RequestParam("roleIds") String roleIds) {
+    public AbstractTip setRole(@RequestParam("userId") Integer userId, @RequestParam("roleIds") String roleIds) {
         if (ToolUtil.isOneEmpty(userId, roleIds)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -350,7 +348,7 @@ public class UserMgrController extends BaseController {
         try {
 //            String fileSavePath = gunsProperties.getFileUploadPath();
 //            picture.transferTo(new File(fileSavePath + pictureName));
-            url = aliOSSFileService.handleOneFileItem(picture, FileTypeArray.picArray);
+            url = aliOSSFileService.handleOneFileItem(picture, FileTypeArray.PIC_ARRAY);
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(BizExceptionEnum.UPLOAD_ERROR);

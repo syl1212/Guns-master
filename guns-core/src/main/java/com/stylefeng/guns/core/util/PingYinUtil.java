@@ -24,7 +24,7 @@ public class PingYinUtil {
 		try {
 			StringBuffer buffer = new StringBuffer();
 			// 把中文转化成byte数组
-			byte b[] = strChinese.getBytes("GBK");
+            byte[] b = strChinese.getBytes("GBK");
 			for (int i = 0; i < b.length; i++) {
 				if ((b[i] & 255) > 128) {
 					int char1 = b[i++] & 255;

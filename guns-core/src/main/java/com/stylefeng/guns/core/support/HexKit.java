@@ -187,7 +187,7 @@ public class HexKit {
 	 * @return
 	 */
 	public static String binary2Hex(String bString) {
-		if (bString == null || bString.equals("") || bString.length() % 8 != 0) {
+		if (bString == null || "".equals(bString) || bString.length() % 8 != 0) {
 			return null;
 		}
 		StringBuffer tmp = new StringBuffer();
@@ -224,7 +224,7 @@ public class HexKit {
 	 * @param buf
 	 * @return
 	 */
-	public static String binary2Hex(byte buf[]) {
+	public static String binary2Hex(byte[] buf) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < buf.length; i++) {
 			String hex = Integer.toHexString(buf[i] & 0xFF);

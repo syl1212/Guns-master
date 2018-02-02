@@ -11,7 +11,7 @@ import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.common.persistence.dao.MenuMapper;
 import com.stylefeng.guns.common.persistence.model.Menu;
 import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.core.base.tips.Tip;
+import com.stylefeng.guns.core.base.tips.AbstractTip;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.node.ZTreeNode;
 import com.stylefeng.guns.core.support.BeanKit;
@@ -105,9 +105,9 @@ public class MenuController extends BaseController {
      */
     @Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/edit")
-    @BussinessLog(value = "修改菜单", key = "name", dict = Dict.MenuDict)
+    @BussinessLog(value = "修改菜单", key = "name", dict = Dict.MENU_DICT)
     @ResponseBody
-    public Tip edit(@Valid Menu menu, BindingResult result) {
+    public AbstractTip edit(@Valid Menu menu, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -134,9 +134,9 @@ public class MenuController extends BaseController {
      */
     @Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/add")
-    @BussinessLog(value = "菜单新增", key = "name", dict = Dict.MenuDict)
+    @BussinessLog(value = "菜单新增", key = "name", dict = Dict.MENU_DICT)
     @ResponseBody
-    public Tip add(@Valid Menu menu, BindingResult result) {
+    public AbstractTip add(@Valid Menu menu, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -160,9 +160,9 @@ public class MenuController extends BaseController {
      */
     @Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/remove")
-    @BussinessLog(value = "删除菜单", key = "menuId", dict = Dict.DeleteDict)
+    @BussinessLog(value = "删除菜单", key = "menuId", dict = Dict.DELETE_DICT)
     @ResponseBody
-    public Tip remove(@RequestParam Integer menuId) {
+    public AbstractTip remove(@RequestParam Integer menuId) {
         if (ToolUtil.isEmpty(menuId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -179,7 +179,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping(value = "/view/{menuId}")
     @ResponseBody
-    public Tip view(@PathVariable Integer menuId) {
+    public AbstractTip view(@PathVariable Integer menuId) {
         if (ToolUtil.isEmpty(menuId)) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -228,7 +228,7 @@ public class MenuController extends BaseController {
      * 根据请求的父级菜单编号设置pcode和层级
      */
     private void menuSetPcode(@Valid Menu menu) {
-        if (ToolUtil.isEmpty(menu.getPcode()) || menu.getPcode().equals("0")) {
+        if (ToolUtil.isEmpty(menu.getPcode()) || "0".equals(menu.getPcode())) {
             menu.setPcode("0");
             menu.setPcodes("[0],");
             menu.setLevels(1);

@@ -1,8 +1,9 @@
 package com.stylefeng.guns.core.log;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.TimerTask;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * 日志管理器
@@ -12,11 +13,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class LogManager {
 
-    //日志记录操作延时
+    /**
+     * 日志记录操作延时
+     */
     private final int OPERATE_DELAY_TIME = 10;
 
-    //异步操作记录日志的线程池
-    private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
+    /**
+     *  异步操作记录日志的线程池
+     */
+    private ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(10);
 
     private LogManager() {
     }

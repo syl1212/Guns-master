@@ -6,8 +6,8 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.BussinessException;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.template.config.ContextConfig;
-import com.stylefeng.guns.core.template.engine.SimpleTemplateEngine;
-import com.stylefeng.guns.core.template.engine.base.GunsTemplateEngine;
+import com.stylefeng.guns.core.template.engine.SimpleTemplateEngineAbstractGunsTemplateEngine;
+import com.stylefeng.guns.core.template.engine.base.AbstractGunsTemplateEngine;
 import com.stylefeng.guns.core.util.ToolUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -27,14 +27,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/code")
 public class CodeController extends BaseController {
 
-    private String PREFIX = "/system/code/";
+    private String prefix = "/system/code/";
 
     /**
      * 跳转到代码生成首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "code.html";
+        return prefix + "code.html";
     }
 
     /**
@@ -59,9 +59,9 @@ public class CodeController extends BaseController {
             contextConfig.setProjectPath(path);
         }
 
-        GunsTemplateEngine gunsTemplateEngine = new SimpleTemplateEngine();
-        gunsTemplateEngine.setContextConfig(contextConfig);
-        gunsTemplateEngine.start();
+        AbstractGunsTemplateEngine abstractGunsTemplateEngine = new SimpleTemplateEngineAbstractGunsTemplateEngine();
+        abstractGunsTemplateEngine.setContextConfig(contextConfig);
+        abstractGunsTemplateEngine.start();
 
         return BaseController.SUCCESS_TIP;
     }

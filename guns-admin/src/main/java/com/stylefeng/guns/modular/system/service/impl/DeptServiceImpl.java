@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author syl
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class DeptServiceImpl implements IDeptService {
 
     @Resource

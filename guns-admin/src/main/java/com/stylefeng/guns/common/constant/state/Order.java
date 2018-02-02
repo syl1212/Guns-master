@@ -8,7 +8,14 @@ package com.stylefeng.guns.common.constant.state;
  */
 public enum Order {
 
-    ASC("asc"), DESC("desc");
+    /**
+     * asc
+     */
+    ASC("asc"),
+    /**
+     * desc
+     */
+    DESC("desc");
 
     private String des;
 

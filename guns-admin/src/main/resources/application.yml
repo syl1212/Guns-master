@@ -106,8 +106,10 @@ guns:
 logging:
   level.root: info
   level.com.stylefeng: debug
+  level.com.thirdparty: debug
   path: logs/
   file: guns.log
+
 
 ---
 

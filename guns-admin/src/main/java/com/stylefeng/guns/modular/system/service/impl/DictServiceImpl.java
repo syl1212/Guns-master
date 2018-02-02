@@ -17,8 +17,11 @@ import java.util.Map;
 
 import static com.stylefeng.guns.common.constant.factory.MutiStrFactory.*;
 
+/**
+ * @author syl
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class DictServiceImpl implements IDictService {
 
     @Resource

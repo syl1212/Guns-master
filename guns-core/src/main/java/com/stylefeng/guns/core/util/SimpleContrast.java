@@ -14,7 +14,7 @@ import java.util.Date;
 public class SimpleContrast {
 
     //记录每个修改字段的分隔符
-    public static final String separator = ";;;";
+    public static final String SEPARATOR = ";;;";
 
     /**
      * 比较两个对象,并返回不一致的信息
@@ -44,7 +44,7 @@ public class SimpleContrast {
                 }
                 if (!o1.toString().equals(o2.toString())) {
                     if (i != 1) {
-                        str += separator;
+                        str += SEPARATOR;
                     }
                     str += "字段名称" + field.getName() + ",旧值:" + o1 + ",新值:" + o2;
                     i++;
