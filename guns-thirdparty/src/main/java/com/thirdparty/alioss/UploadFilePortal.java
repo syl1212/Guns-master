@@ -16,7 +16,7 @@ public class UploadFilePortal {
 	
 	public static UploadFileDTO uploadFile(byte[] data, String storeFilePath, String suffix) throws UploadFileException  {
 		UploadFileDTO uploadDTO = new UploadFileDTO();
-		uploadDTO.setFileLength(data.length);
+		uploadDTO.setFileLength(Long.parseLong(String.valueOf(data.length)));
 		uploadDTO.setInput(data);
 		uploadDTO.setFileStorePathName(storeFilePath);
 		uploadDTO.setFileSuffix(suffix);
@@ -27,7 +27,7 @@ public class UploadFilePortal {
 	
 	public static UploadFileDTO uploadFile(byte[] data, String storeFilePath) throws UploadFileException  {
 		UploadFileDTO uploadDTO = new UploadFileDTO();
-		uploadDTO.setFileLength(data.length);
+		uploadDTO.setFileLength(Long.parseLong(String.valueOf(data.length)));
 		uploadDTO.setInput(data);
 		uploadDTO.setFileStorePathName(storeFilePath);
 		uploadDTO.setFileName(storeFilePath);

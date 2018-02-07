@@ -74,7 +74,6 @@ public interface MenuDao {
      * @return
      * @date 2017年2月19日 下午10:35:40
      */
-    @Cacheable(value = "getMenusByRoleIds")
     List<MenuNode> getMenusByRoleIds(List<Integer> roleIds);
 
 
