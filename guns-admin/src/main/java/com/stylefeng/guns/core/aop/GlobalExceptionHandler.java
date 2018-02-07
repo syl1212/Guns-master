@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     public ErrorAbstractTip notFount(BussinessException e) {
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
         getRequest().setAttribute("tip", e.getMessage());
-        log.error("业务异常1:", e);
+        log.error("业务异常:", e);
         return new ErrorAbstractTip(e.getCode(), e.getMessage());
     }
 
