@@ -48,7 +48,7 @@ public class LogAop {
         try {
             handle(point);
         } catch (Exception e) {
-            log.error("日志记录出错!", e);
+            log.error("日志记录出错1!", e);
         }
 
         return result;
