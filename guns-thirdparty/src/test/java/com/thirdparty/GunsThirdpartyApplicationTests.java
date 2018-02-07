@@ -25,7 +25,7 @@ public class GunsThirdpartyApplicationTests {
 		uploadFileDTO.setFileStorePathName("/test/");
 		uploadFileDTO.setFileSuffix(".jpg");
 		uploadFileDTO.setInput(readFileByBytes("D:\\other_unimportant\\龙珠1.jpg"));
-		uploadFileDTO.setFileLength(readFileByBytes("D:\\other_unimportant\\龙珠1.jpg").length);
+		uploadFileDTO.setFileLength(Long.parseLong(String.valueOf(readFileByBytes("D:\\other_unimportant\\龙珠1.jpg").length)));
 		System.out.println(aliOOSFileService.uploadFile(uploadFileDTO));
 	}
 
