@@ -1,11 +1,11 @@
 #mq连接配置
-rabbitmq.demo.address=127.0.0.1:5672
+rabbitmq.demo.address=localhost:5672
 rabbitmq.demo.username=sunyuanli
 rabbitmq.demo.password=sunyuanli
 rabbitmq.demo.vhost=/
 
 #################################################
-rabbitmq.demo.key=true
+rabbitmq.demo.key=false
 #demo rabbitmq consumer endpoint config
 rabbitmq.demo.trans.exchange.name=te-demo-bound
 rabbitmq.demo.trans.req.queue.name=q-demo-req

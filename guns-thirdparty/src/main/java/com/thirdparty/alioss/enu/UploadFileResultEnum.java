@@ -19,7 +19,7 @@ public enum UploadFileResultEnum {
 	/**
 	 * 上传异常
 	 */
-	UPLOAD_ERROR(2,"文件上传异常");
+	UPLOAD_ERROR(4,"文件上传异常");
 	
 	private int code;
 	private String message;

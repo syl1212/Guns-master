@@ -20,27 +20,27 @@ public class ThreadsDemo {
             new ThreadFactoryBuilder().setNameFormat("thread-test-pool-%d").build(), new ThreadPoolExecutor.AbortPolicy());
 
     public static void main(String[] args){
-        List<String> taskList = new ArrayList<String>(100);
+        List<User> taskList = new ArrayList<User>(100);
         //随机创建100个任务
         for(int i=0; i<100; i++){
             int index = (int)Math.ceil(Math.random()*20 - 1);
-            taskList.add(userIds[index]);
+            User user = new ThreadsDemo().new User(userIds[index]);
+            taskList.add(user);
         }
-
         System.out.println("集合：" + taskList.toString());
 
         long start = System.currentTimeMillis();
         System.out.println("任务开始时间：" + start);
 
-        final CountDownLatch latch=new CountDownLatch(taskList.size());//两个工人的协作
+        final CountDownLatch latch=new CountDownLatch(taskList.size());//计数器
 
-        for(String str : taskList)
+        for(User user : taskList)
             threadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    synchronized (str) {
+                    synchronized (user.getUserId()) {
                         try {
-                            System.out.println(String.format("当前线程：" + Thread.currentThread().getName() + "，当前用户：" + str));
+                            System.out.println(String.format("当前线程：" + Thread.currentThread().getName() + "，当前用户：" + user.getUserId()));
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -61,5 +61,24 @@ public class ThreadsDemo {
 
         long end = System.currentTimeMillis();
         System.out.println("任务结束时间：" + end + "，一共消耗时间：" + (end - start));
+    }
+
+    private class User{
+        public User() {
+        }
+
+        private String userId;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public User(String userId) {
+            this.userId = userId;
+        }
     }
 }
